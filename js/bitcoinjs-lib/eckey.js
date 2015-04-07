@@ -24,7 +24,8 @@ Bitcoin.ECKey = (function () {
 				bytes = ECKey.decodeCompressedWalletImportFormat(input);
 				this.compressed = true;
 			} else if (ECKey.isMiniFormat(input)) {
-				bytes = Crypto.SHA256(input, { asBytes: true });
+				waBytes = hash_sha256(input);
+				bytes = wordArrayToByteArray(waBytes);
 			} else if (ECKey.isHexFormat(input)) {
 				bytes = Crypto.util.hexToBytes(input);
 			} else if (ECKey.isBase64Format(input)) {
@@ -42,7 +43,7 @@ Bitcoin.ECKey = (function () {
 		this.compressed = (this.compressed == undefined) ? !!ECKey.compressByDefault : this.compressed;
 	};
 
-	ECKey.privateKeyPrefix = 128; // MaxCoin: 0x80
+	ECKey.privateKeyPrefix = 128; // MaxCoin: 0x80 = 128
 
 	/**
 	* Whether public keys should be returned compressed by default.
@@ -101,10 +102,19 @@ Bitcoin.ECKey = (function () {
 	ECKey.prototype.getPubKeyHash = function () {
 		if (this.compressed) {
 			if (this.pubKeyHashComp) return this.pubKeyHashComp;
-			return this.pubKeyHashComp = Bitcoin.Util.sha256ripe160(this.getPub());
+			console.log(this.getPub());
+			var waPub = CryptoJS.enc.Hex.parse(bytes_to_hex_string(this.getPub()));
+			console.log(waPub.toString(CryptoJS.enc.Hex));
+			var waPubKeyHashComp = Bitcoin.Util.sha256ripe160(waPub);
+			this.pubKeyHashComp = wordArrayToByteArray(waPubKeyHashComp);
+			console.log(this.pubKeyHashComp);
+			return this.pubKeyHashComp;
 		} else {
 			if (this.pubKeyHashUncomp) return this.pubKeyHashUncomp;
-			return this.pubKeyHashUncomp = Bitcoin.Util.sha256ripe160(this.getPub());
+			var waPub = CryptoJS.enc.Hex.parse(bytes_to_hex_string(this.getPub()));
+			var waPubKeyHashUncomp = Bitcoin.Util.sha256ripe160(waPub);
+			this.pubKeyHashUncomp = wordArrayToByteArray(waPubKeyHashUncomp);
+			return this.pubKeyHashUncomp;
 		}
 	};
 
@@ -130,15 +140,35 @@ Bitcoin.ECKey = (function () {
 
 	// Sipa Private Key Wallet Import Format 
 	ECKey.prototype.getBitcoinWalletImportFormat = function () {
+		// encode for CryptoJS
 		var bytes = this.getBitcoinPrivateKeyByteArray();
-		bytes.unshift(ECKey.privateKeyPrefix); // prepend prefix byte
-		if (this.compressed) bytes.push(0x01); // append 0x01 byte for compressed format
-		// var checksum = Crypto.SHA3(bytes, {  outputLength: 256, asBytes: true });
-		// var checksum = keccak(bytes);
-		var checksum = hash_keccak(bytes);
-		bytes = bytes.concat(checksum.slice(0, 4));
-		var privWif = Bitcoin.Base58.encode(bytes);
-		return privWif;
+		var baby = CryptoJS.enc.Hex.parse(bytes_to_hex_string(bytes));
+
+		// add 0x80 to beginning
+		var version = CryptoJS.enc.Hex.parse('80');
+		var child = version.concat(baby);
+
+		var compressed = CryptoJS.enc.Hex.parse('01');
+
+		// append 0x01 byte for compressed format
+		if (this.compressed) {
+			child = child.concat(compressed);
+		}
+
+		// hash the extended key
+		var teenager = hash_keccak(child);
+
+		// take first 4 bytes of second hash as checksum
+		var checksum = CryptoJS.lib.WordArray.create(teenager.words.slice(0, 4), 4);
+
+		// add checksum to end of extended key
+		var adult = child.concat(checksum);
+
+		// convert to byte array, for base58
+		var bytes = wordArrayToByteArray(adult);
+
+		// base58 encode
+		return bs58_encode(bytes);
 	};
 
 	// Private Key Hex Format 
@@ -253,9 +283,9 @@ Bitcoin.ECKey = (function () {
 		var validChars22 = /^S[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{21}$/.test(key);
 		var validChars26 = /^S[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{25}$/.test(key);
 		var validChars30 = /^S[123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{29}$/.test(key);
-		var testBytes = Crypto.SHA256(key + "?", { asBytes: true });
+		var testBytes = hash_sha256(key + "?").toString(CryptoJS.enc.Hex);
 
-		return ((testBytes[0] === 0x00 || testBytes[0] === 0x01) && (validChars22 || validChars26 || validChars30));
+		return ((testBytes[0] == 0x00 || testBytes[0] == 0x01) && (validChars22 || validChars26 || validChars30));
 	};
 
 	return ECKey;

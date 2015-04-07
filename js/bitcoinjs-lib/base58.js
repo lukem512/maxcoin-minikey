@@ -32,7 +32,6 @@
 				} else break;
 			}
 
-			console.log(chars);
 			return chars.join('');
 		},
 
