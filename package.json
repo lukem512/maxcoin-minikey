@@ -1,6 +1,12 @@
 {
   "name": "maxcoin-cryptobullion-redemption",
+  "author": "Luke Mitchell <hi@lukemitchell.co>",
   "version": "0.1.0",
+  "description": "A tool for manipulating MaxCoin minikeys",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/lukem512/maxcoin-minikey.git"
+  },
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-combine": "^0.8.3",
