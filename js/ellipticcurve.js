@@ -286,7 +286,6 @@
 	// TODO: modularize the multiplication algorithm
 	ec.PointFp.prototype.multiply = function (k) {
 		if (this.isInfinity()) return this;
-		console.log(k);
 		if (k.signum() == 0) return this.curve.getInfinity();
 
 		var e = k;
