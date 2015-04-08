@@ -60,31 +60,6 @@
 				return {prvKey: keypair.prvKeyObj.prvKeyHex, pubKey: keypair.pubKeyObj.pubKeyHex};
 			}
 
-			// var get_pubkey_from_privkey = function(privkey) {
-			// 	// var keypair = KEYUTIL.getKey({d: privkey, curve: 'secp256r1'}); 
-
-			// 	// var ec = new KJUR.crypto.ECDSA({"curve": "secp256r1"});
-			// 	// ec.setPrivateKeyHex(privkey);
-			// 	// console.log(ec.prvKeyHex);
-			// 	// console.log(ec.pubKeyHex);
-			// 	// return keypair.pubKeyHex;
-
-			// 	var curve = EllipticCurve.getSECCurveByName("secp256r1")
-
-			// 	//convert our random array or private key to a Big Integer
-			// 	var privateKeyBN = BigInteger.fromByteArrayUnsigned(privkey.toString(CryptoJS.enc.Hex));
-
-			// 	var curvePt = curve.getG().multiply(privateKeyBN);
-			// 	var x = curvePt.getX().toBigInteger();
-			// 	var y = curvePt.getY().toBigInteger();
-			// 	var publicKeyBytes = EllipticCurve.integerToBytes(x,32);
-			// 	publicKeyBytes = publicKeyBytes.concat(EllipticCurve.integerToBytes(y,32));
-			// 	publicKeyBytes.unshift(0x04);
-			// 	console.log(publicKeyBytes);
-			// 	var publicKeyHex = bytes_to_hex_string(publicKeyBytes);
-			// 	return publicKeyBytesyHex;
-			// }
-
 			function bytes_to_hex_string(arr) {
 				var str ='';
 				for(var i = 0; i < arr.length ; i++) {
@@ -186,30 +161,9 @@
 				}
 
 				// Decode MiniKey
-				// Generate new address (WORKING!!!!)
 				var key = new Bitcoin.ECKey(mini);
 				document.getElementById("wifkey").innerHTML = key.getBitcoinWalletImportFormat();
 				document.getElementById("address").innerHTML = key.getBitcoinAddress();
-
-				// Generate new address (WIF IMPORTS CORRECTLY BUT A DIFFERENT ADDRESS IS SHOWN IN MAXCOIND)
-				// var newKey = new Bitcoin.ECKey();
-				// document.getElementById("wifkey").innerHTML = newKey.getBitcoinWalletImportFormat();
-				// document.getElementById("address").innerHTML = newKey.getBitcoinAddress();
-
-				// Self-coded... (DO NOT USE FOR NOW)
-				// var priv = hash_sha256(mini);
-				// console.log('Private key is ' + priv.toString(CryptoJS.enc.Hex));
-
-				// var pub = get_pubkey_from_privkey(priv);
-				// console.log('Public key is ' + pub.toString(CryptoJS.enc.Hex));
-
-				// var address = create_address(pub.toString(CryptoJS.enc.Hex));
-				// console.log('Address is ' + address);
-
-				// var wif = prvKey_to_WIF(priv.toString(CryptoJS.enc.Hex));
-				// console.log('WIF is ' + wif);
-				// // document.getElementById("wifkey").innerHTML = wif;
-				// // document.getElementById("address").innerHTML = address;
 			}
 		</script>
 		<!-- End of address generation functions -->
@@ -219,7 +173,6 @@
 			<div class="page-header">
 				<h1 class="text-muted">MaxCoin Cryptobullion Redemption Tool</h1>
 				<p class="lead">This tool provides the ability to convert Minikeys, found on your cryptobullion, to Wallet Import Format keys that will be accepted by the MaxCoin wallet.</p>
-				<!-- <p style="color: red">maxcoind imports WIF <strong>5JPy8Zg7z4P7RSLsiqcqyeAF1935zjNUdMxcDeVrtU1oas87rGN</strong> as <strong>mY4JjazrBbuFN66aiCZnn5JRZBrhecVev5</strong> with a Public Key of <strong>0431718ae6e9492381f8e4f1f7b640c708d6d237934ea4108677ae6931aa9b8f8376ccb2702657f18520527eff75738b4c1df8059b5e93480282ee863f344a29a5</strong> and IsCompressed set to <strong>false</strong></p> -->
 			</div>
 
 			<div class="row well">
