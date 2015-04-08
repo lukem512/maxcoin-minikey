@@ -788,7 +788,6 @@ function bs58_decode(string) {
 	// TODO: modularize the multiplication algorithm
 	ec.PointFp.prototype.multiply = function (k) {
 		if (this.isInfinity()) return this;
-		console.log(k);
 		if (k.signum() == 0) return this.curve.getInfinity();
 
 		var e = k;
@@ -3132,7 +3131,7 @@ Bitcoin.ECKey = (function () {
 	* Parse a wallet import format private key contained in a string.
 	*/
 	ECKey.decodeWalletImportFormat = function (privStr) {
-		var bytes = Bitcoin.Base58.decode(privStr);
+		var bytes = bs58_decode(privStr);
 		var hash = bytes.slice(0, 33);
 		var checksum = hash_keccak(hash);
 		if (checksum[0] != bytes[33] ||
@@ -3152,7 +3151,7 @@ Bitcoin.ECKey = (function () {
 	* Parse a compressed wallet import format private key contained in a string.
 	*/
 	ECKey.decodeCompressedWalletImportFormat = function (privStr) {
-		var bytes = Bitcoin.Base58.decode(privStr);
+		var bytes = bs58_decode(privStr);
 		var hash = bytes.slice(0, 34);
 		var checksum = hash_keccak(hash);
 		if (checksum[0] != bytes[34] ||
