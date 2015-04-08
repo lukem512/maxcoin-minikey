@@ -286,6 +286,7 @@
 	// TODO: modularize the multiplication algorithm
 	ec.PointFp.prototype.multiply = function (k) {
 		if (this.isInfinity()) return this;
+		console.log(k);
 		if (k.signum() == 0) return this.curve.getInfinity();
 
 		var e = k;
@@ -617,10 +618,9 @@
 	ec.X9Parameters.prototype.getG = function () { return this.g; };
 	ec.X9Parameters.prototype.getN = function () { return this.n; };
 	ec.X9Parameters.prototype.getH = function () { return this.h; };
-
-	// secp256k1 is the Curve used by Bitcoin
+	
 	ec.secNamedCurves = {
-		// used by Bitcoin
+		// secp256k1 is the Curve used by Bitcoin
 		"secp256k1": function () {
 			// p = 2^256 - 2^32 - 2^9 - 2^8 - 2^7 - 2^6 - 2^4 - 1
 			var p = ec.fromHex("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F");
@@ -633,14 +633,9 @@
 					+ "79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798"
 					+ "483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8");
 			return new ec.X9Parameters(curve, G, n, h);
-		}
-	};
-
-	// secp256r1 is the Curve used by MaxCoin
-	ec.secNamedCurves = {
+		},
 		// http://bouncycastle.sourcearchive.com/documentation/1.33/SECNamedCurves_8java-source.html
 		"secp256r1": function () {
-			// p = 2^256 - 2^32 - 2^9 - 2^8 - 2^7 - 2^6 - 2^4 - 1
 			var p = ec.fromHex("FFFFFFFF00000001000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFF");
 			var a = ec.fromHex("FFFFFFFF00000001000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFC")
 			var b = ec.fromHex("5AC635D8AA3A93E7B3EBBD55769886BC651D06B0CC53B0F63BCE3C3E27D2604B");
