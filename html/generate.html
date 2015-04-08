@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MaxCoin Cryptobullion Generation Tool</title>
+		<meta charset="utf-8">
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAAY40lEQVR42s17e5Ad1Xnn7zy6b9/HvDSSRjPSaCQGkIRkIhkJC1UAB7/ilCVvDIudxSTYARnwrpM4y1Z5K8FVVKpcSbYIj4JgygnEIZHXxLCFvBRP27IcxFsSw8gaoceMNCPNS6OZ++7uc76zf/RjenruSGDibE5V17237+lzzvf73t85zfAh2sjISPInB8AA6OnpaRQKBXieJ1zXvVgptUUpdbnv+xcrpVZ5nrdUKZX3fd9SSkEp5SmlykqpMa31IBG9R0QHiOhNAIP1ep2+/e1v47vf/S4TQnDHcWhqasoUi0X09vbiM5/5zK9MA/u3Itz3fW3bNrTWllJqKxFtV0pd6/v+et/3877vw/d9hARDKRX/Tt7XWkNrDWMMjDElAAcZYz8VQux2HOftlpYWXSqVsGzZMuE4jimVSjQzM4Oenh5s3rz51w9AgngWEk+MMWOM6QDwZSL6fa315RFRxhgAMABIKQXP83i9Xke9Xofrusz3fWitjTEGWmsQEWmtoZTiSilGRGCMwbIsymQyb9i2/Q+ZTOYHmUzmnDGGdXV1sUwmY8KGNWvW/HoAaMB1ACAASwB8A8DXACxRSplwwRoAKxaLfHR0lI2MjGB4eBhTU1MolUqo1WrwfT9YRNAfmUwG2WwWzc3NaG5uRj6fN5lMhjjnBoCQUsJxHJbNZkccx3kwm80+Ytv2jOM4Ip/PG601GWNg2zZWrFjxbwdAingBQAOQAG4D8OcAOrXWxrZtchyHlctlPjAwgLfffhsDAwMYGxtDrVZDxE3OefwZNSKaXRRjkFKiUCigvb0dK1asQHd3N9ra2jTnHEIInsvlmOM4JxzH+bNyufzPlmWxjo4OzjnX0TjLly//8AAMDw+DMRb15SHx6wA8AuAarbWxLIvy+TybnJzkv/jFL7B3714MDg5CKQXLsmBZFoQQc8YNVWPBFqmE1hqMMbS0tOCSSy7Bpk2b0N3dTZxzwxjj+Xye2ba927KsrwshThGR4JwTArW7IAjnBWBwcDAmngdNA/gDAPcbY1qMMbpQKLByucxfeOEFvPDCCxgbG4Nt28hkMtGzc7j7QVs0RmQsc7kcNm3ahE996lNYvnw5+b5vLMsSlmWNMcZ2cs6fISKBQD0vCMKCABw5cgQAIKVkSil0dXWZmZmZvwJwFxGRlNJks1mxb98+7Nq1C0NDQ8hms8hkMiCiC3L4VwGCMQatNWq1Gtra2vC5z30On/70pyGl1K7rciEEA/A/AXwHgbSaC4HQEIC+vj4AQCaT4Y899hjt3LnTkVL+Hef8v2itdT6f59VqlX3/+9/Hyy+/DCklstnsr4XwRk0IAc/zUKvV8NGPfhS33norurq6qFgsGhHo2gOMsT8yxlwQhHkAvPnmmwCAXC7HXn31VbN58+ZMoVD4ZyHEFwColpYWceLECfbAAw/g+PHjaGlpAfDhxPxXaZERLZVKaGtrw5133onNmzebmZkZLYSQAB5hjN1xIRDmALB37150dHRAa81KpRK2bNliDh8+/IQQ4ibGmFq0aJE8ePAg7rvvPlSrVRQKBSil/l0JTzchBFzXhe/72LlzJz772c9iZmZGcc4lgL8B8E3Mei6kQeDJwTzPw+rVq1Eul3mhUDAHDhz4S631TZ7nqXw+L1955RV85zvfgeu6yOfz/9+JBwCtNWzbhuM4eOihh/DUU0+hpaVFaq01gD8B8D9C4kWj52MJ+PGPf4zjx4/jiiuuELZta6XUH0gpH2eM6ba2NnHo0CHcd999kFLCtu3Yp/9HakSEYrGIO+64A9u3bzfT09MIDeNnATyHhCREUsAA4OmnnwYAtLa2cgBkjFlvWdbPOeeLCoWCGRsbY/feey+UUshkMjDGxFb5P0qLbBARoVqt4lvf+hauuuoqKhaLXAgxCOBqxtiwMYYTERljsHLlykAFPM9DW1sbKpWKcRwHSqn7Pc9bRES6WCyy733ve6jVagiTnYYLmI3weOo+jyO/993CsZKRYnKO9P3I8xhjwDmHZVm4//77MTQ0xLPZrCKiVQD+2hgDIoKUMlZf/sQTT+DGG29EsVgUAMzk5ORO3/c/4XmeZoyJH/3oRxgeHkYul5tDfJitxcR5nodqtYJ6vRYlNdBKoV6volqtwve8QGpSi29EICmFWjV4Tvk+iAhEOp6jVqvFc6dbZBNKpRIefPBBEJHknJMx5kvGmM8zxkgpJcrlMgYGBsAef/xxNDU1sTCbWiqEeB1AT3Nzs+nv72c/+MEPUCgUUlye5YTnuYABFi/twMpVq7FkaQeampoghIBSCqViEZMT4zg5dAIT42PgjMOyMzBmrtvknENpBc/10NLaiu6e1VjW2YnWllbYodq59TrOnTuH0dPDODk0hEqlHEeciRQaRAQhBCYnJ/GVr3wFN998M01NTXHG2AHf96/inNellKxYLBqZzWbheR5njGljzJ1a6x7LsvT09LR46aWXYFlWLGKMsRh5IkK9XsPKlatwxZVbsaJnFWzbhpkTDDGwFQycBxIydOI4Xn/1XzF65gyy2Wzcj3OOer2OXC6Pbb95LdasW498oQAYgEgnRQSrLmLAFVswM3MO775zAAfeehOu68K27WT6DaUUCoUCnnzySWzdupV3dnbqarW6EcAtRPSI53k8m81qsWPHDqa1Jq31UmPMo1rrpmw2y/bt28f6+/vjhUY6zLmAUhqMcVx73Sdx3ad+G23ti0Fax/o+q8eBoVQqEOOlHcuwbv1HoLTC8MkhCCnBOUetWsXKnlXY8YUb0HvJpTBEIRdnbQdjDJwxGAP4vgfbttF78aXo7lmFkeFhFGemYVk2yMwaQyEEisUiyuUytm3bhmq1yowxq5RSjymlfGMME9u3b5fGGDLG3EZE/5lzrkulEn/xxRdjSz9LPIfWGo6TwRdu/D1ctuFy1Gq1QB0Yw/DJIfS9sx/9fQcx8Mt+nDh2DFNTk8g4DlpbW+F5LogIa9ZeBi4EBo8fg+d5WLN2HT73uzfAtm24tRqcXA6VShkDhw+h78B+/LK/D0ePDGD41BA810VLaxscx0GlXEZrWzvWXHYZTp0awtTZs5BSxraKiGBZFgYHB7F+/Xq2ePFiqtfrHVrrd40x/VprKbZv306MMU5EDxBRVyaTwcGDB9nAwEBDl2eMwRdu/D30rL4IpZkicvk8Rs+M4Pn/+wxef+0VjJwawtnJSZw7exYTE+M4OXgChw+9i+lzU1jevRKZTAbVagW9l1yKWrUKwTn+0/VfjA2nncngzdf24cXnnsXhQ/0YHx/FubNnMXV2EmdGT+PokQEce28AjpNF98oeuG4d2WwWl166FkcGfolKpQIhRJyXcM5RLpehlMKWLVuoUqlwY0xBSvlPAIzYsWMHjDHbAPxZaEzYnj174HlenMMzxiCEQK1WxW9eex02XrEZpZkZ5JuacKi/D8889SRmZmbgOA5s2w7y/7AOYFkWGICR4VM4cfwoVq3uRVNzM1zXxcpVq3HpunXg4TxSCjy7+//gjddeBWcMmUwmHktaFuxwvFqthkN974BIY+269XBdFy0tLWhfvBgH978dMAqzNQUhBEZHR7Fx40aWzWaZ67rdnuf9i+d5k5Ef+Z2wlKROnz6NiYmJGMWoua6L9sVLsPnKrahVKsgXChg8fgzPPvM0GONwHCd0V8Flkt8BFApNODc1hWeefhKe58K2LQgePAcY5HM5vPTcszjU14fm5uZ4/mis5HhCCOQLBez92U/xr3t/htbWFtTrNVx22Xqs3/AR1KpVsISrFkLg3LlzeOutt5gQQnuel/F9/zO+74MjyAeuC8WFHzt2LA4SogEAwHNdrFv/ETQ1NYFzBuX7+MkLz4W2gcV6t1A6rLVGLpfDxPg4Xtm7B7lsNjSYBs1NTThy+BDeObgfTc3NsUtr1JIg5/J5/OwnL+H0yCk0FfLgnGPLxz4Gxnm89qRb3L9/PyqVSlRc+S0iAgfQC2BD6IrY8PBwLPrRw0QEISUuvuQSGEPI5/M4emQAo6Nn4ugwWQs4HwjZbBaHD/Vj+tw55LIOLBmoyNtvvYEgi23cksyI1sU5h+t6eP3VVwNvRRoXXdSLtrY2eJ43p29kDM+cOcONMXBdd3O1Wl3MAWwOjYKZnp5mU1NTsbWPVEAphWw2i8Xti8HBYEkLg4PH5ywqOVn6frIJIVCtVjE2ehrZbBZZJ4NyqYTxsXFYltWwrpDkZvLSWkNKicETx+G5dViWREtzM9rbF8P3/Tl9OecoFosYHBwEAPi+36mU+g3OGPuNcGE0MTEB13XjgCeaXGuNTMZBvpCHkByMAdNTU2AJkYyITy54oQoREaE4MwPLkrBDr+C69Xn5QnqMNACRFBSLRdRrdTi2DcfJoLm5aY5KJhOlkydPMq01+b7PlVLrJOf84sACS0xOTs7RvyjlDT4B27ZgSQnBQwOV4HS0mHSa3MiNRouypYTgDJxhHnhpwNLfk/2DuYNSumXJeB1JFY7ayMgIXNc14f2PSCnl6tBIsFKpNGcRUcwfhbeWkAEAQgAM8f2ob5L4JOHJPsYYmBAsaUkwHahFkrONgFhIDaJLCgEpBSQX8VqSIAFBIDc9PY16vc5CgHqklHJpuPAYgOhBEVrTiNNShgBIEd9PBhzJzzQQye9kDDhjsKQMYwwOY6ghCI0MYKOLcQ7BAxBMSEMjm1StVuG6bpTjtEkpZQEIgp0ozYzF2hiwhA5aUkBaMojRE5PMV5f5upzcI4hUSspgnEBk59uMNCCNVCCaT/Ag9+CcAynCo76MMYT7ksy2bRhjCtKyLCuKAJP+P63XgQSIWNTS+tVI9COxa2TYwADBBcANOONzFnw+ENKGMVpjtIakyjUymtEGS3gvK2WYkaUNR5pjsZ6F1zwRTCROyd/R1lYyqzPGgIFBcA7igVdJc2sh4tMMCi7TEOTk2tNX1E/atu1HxAsh5hQWovvRFWxM8jhQSgZASRvQyAhG0kBEs54mAUy0D3gh3Z/vAQyIdGiPDHTKLadBiJgQrr0uLcuqMMZapZTGcRyWBCDJsWT5K3kvOXgUQDWShIjIeZwNr+R4kS1JS0IjFQiMJ4fWFIOYNM7J9QWpvAPLsowxhgEoSdu2x4hoeT6fN62trSzSj+TEjYxTxMnkQrXWc7xAGoSkpEQcI2OgU/Oko8FG4jtXBQhaBydMuBAgTSHBc1U6COgyyYhzWlqWNUREH81ms6a9vT0Wz0jkkz41YJYJPml+RBZNknaFyQApKnBG3FJKQyu9YD6xUHyQlgjlK/hKA9xPjDVX/6OQ3rIs4/s+GGND0rKso0QE27bR09MzT2dirhgDTRqcOBg0tNHzwuCI00nPkDSEswFTII6+0uHZIN1AtBeOBdJRIGMMntLwfQWDsECasgNBaU5h8eLFEEIw13XBOe+TlmW9Ey6Mr1mzBpZlxQuOJtJagzRBKw3OOIxkIG3mANCofJaM/pL/ax1wPT4kpVQsFUmxPx8AaZvh+T48zwcB0JpiO5D2Ap2dnQYAN0EZ8LCUUr4BoGKMyff29pr29nY2PT2NMFCY4w59pQDGICio1iYnSOt+2v0l/bUhgtIaXuJ0GGkCCVqQ+LT7SwdgylfwfA+GAZrmSlSce9g2urq6onrHGGPsALcs66hlWYeICF1dXWbDhg2oVCrzjAxRIGKer+ApFbubWSOk53xPu6E54xmCUjoYy1fw/dnxkuOkx0iPPfvdxOtyPQWt9JxnjDHwPA/t7e1YunQpecEmzVtENMGllFpK+ZNwS4muueaaObFAchGu5wUTee48ItOLjYxcvEsU/Q4DF6UUXNeH63rwfD8ueSXHSYLRCOzItRFpeL4Hz1PwPA+adOxao36u66K3tzc+yAHgp6GqcnDOn7UsC57nyauvvhodHR2o1+tzxI3IgDEB3/cAcBgyC0oAnYcYE26ZGSCQBK1hQjszS9DCRC8kDZyJUEU5jJlfp5BSYsOGDUYpJYwxvjHmeWMMuJQSUspXOOcH6vU6enp66OMf/zhKpVKsy0IIjI+P4bXX9sGyHPT19eHkyaG4Bp+OC86nElprSEui/90+TIxPwPMV3nzjdai0pCR+NwIkaRQrlQr2v/0mpLRw4vgxvPfeAGRozAGgVqth5cqV6OnpodD6/wxAPwCwkZERCUAB+O9E9NeFQkHv379ffOlLXwortog9ghAC3d0rMT4+hnq9HhvKZISYzATTwVDUgj1FD21ti5BxHIyNnoaU87fg0tZ/oaAoCoSWdS7H9LlzKJeLEELG85ZKJXz5y1/GlVdeSZVKhXPObwbwBADJRkZGGIIy+jIAB4ioo6Wlxdx+++1s9+7diIKjyIJ7XrAtJeXsBOlsLP09CUi0aCEE/HDnNwIy6TbT7rAR8WmQXNeFEBw8rFhF6e+yZcvwjW98g0L3dxjAFQCqAFh0gEgAGAXwPQDwfZ9uv/125HK5OHWMxG6h3di0eCbFuFFcrpSCECKOO9J9FhqrUYob3bdtGyyVWvu+j+uuuw6O45hQJR4OiRcADA8RjILvhxhjw6VSSWzcuNHcdNNNOHv27JyscCFj1Mg4pY1gWr/jGGCB/xu51PT/6fvJ4KhcLmP9+vXYtGkTVSoVwTnvM8b8fZRKAOEhqXq9bohIENEZY8xfMsYwMzNDd955J9auXYtSqdSw0NgobF7IEKa5lybmfJxtZAQXGjOKOXzfRzabxY4dO5Kh8z1h0CdCyQdfvnw5stkslFI61MGHAOzxPE80Nzfre+65Jx6wURh6Pik433/p/xd6Ps3Z98OEyDN8/vOfR1dXl3JdlzPGngLwLwhf6gCA2267LZCAyE9qrbnv+4aI/pgxVpyamhJXXXWVueuuuzA1NRUbqIWqLOfjYjp6a3Slbcb8gIcWnD9ZtJmensY111yDbdu2UblclpzzYQB/OmuLEx4JALq7u2GMwapVq4iIhFLqABHdxTnHxMQE3XLLLfjqV7+K8fHxuITdyFidjzupN0EaEpAGKS1xC/WP7gkhMDMzg8svvxw33HCDqdfjzZb/CmAwNHxkjMFtt90WoJF0U4ODg5iYmEBra6vwfV9zzu8joj8yxijHceTdd9+NH/7wh1iyZMm8LDByc0mXl26N+iXb+dxfo37Jz4j4tWvX4mtf+xqEEFopJRhjfw7gL5A4I7hz5854rDm7kVprtLW1QSlFAFhLS8s3p6amViilrq9UKuruu++WQgjs2rULixYtarjpkfb3jYhNV3zSIC1EcCPio2emp6exYcMG3HrrrZBSKs/zJOf8YcbYX5jgvHDD833zVjcwMAAA8H2fKaWMZVk5rfWTSqnfMcaobDYrHn30Ufboo48ik8nAcZw45FxIAn7VA5UX4nxUgyyXy7j66qvxxS9+0QDQvu9LzvnjlUrlq/l8Pn48zf2GAADA4cOHo2CFT09PU1NTU56I/tH3/d8lItXc3Cyef/55du+992JycjI+MZ5e8EKR4IUAOZ8EJMetVquwLAs7duzAJz7xCVOv14mIBGPsUa31HUKI6MGGxC8IAAC8++67EQhMSgnf94Xv+/dqrf+b7/vU1NRkTp06JR5++GH8/Oc/h5QSuVxuXux+PltwIcLT9yJ743ke6vU61qxZg+uvvx4XXXSRLpfLPOjC7uGcf5uI5hyTb0T8eQEAgAMHDkSWlmmtmdaaiOh2rfX/8n0/b9u25pyzPXv28F27duG9996DZVlwHCeuEDUi6oO2CDDP8+C6Ljo6OvDJT34S27ZtIyGEqdVqgnN+FsDXAfxvhNb+QsRfEAAAeOONNyJOsHBPXTPGNmqtH1FKfUxrbfL5PJXLZbZnzx7+3HPP4ejRo3NK0Ont8vOBkt5KD981BAB0dnZi27Zt2Lp1K7W2tppyucyJiHHOXwRwB4BjH4T49wUAAOzbty/ur7XmSimttc4YY76ulPqWUmoxAJPL5ahSqbC+vj6+b98+9Pf3Y2JiAkqp+FW4aCsurQaRZ4jygyjNbm1tRW9vLzZt2oR169ZRU1OTqdVqXCnFGGOnAdwN4LGQ6DkvRlyI+PcNABC8TRLW0iCE4J7ngYLWZYz5plLqD5VSrQBMWEfQU1NTfHBwkA0MDLBTp05hdHQUMzMzcTU4WVANDjdYKBQKWLJkCTo7O9Hb22u6u7tp0aJFhjEmarUatNaMMTbOGPtbAA8aY86GhJsQhPdN/AcCIGovv/xy/KwxhtdqNTKBTK8goluI6Gat9aVaayOEYEGKyozWmiqVCisWi6xWq6FWqzHP82BMcO4gk8mYTCaDQqFAuVwOnHNujGHR6zAAwBh7B8A/IChmjEdrwAcQ+Q8NAAA8//zzqFarkUhzYwyrVCo6PNuXBXA1EW0nomuJ6FIiygCYc9Y/uYmajPUjyQhVosoY+yWCAuaPGWP7AHgAQMG7gXO4HoW3v3YAorZ7926ENbYYCCGELhaLEEKAMZYhorVEdCWAy4noEmPMKiJqN8ZkAIgQAA3ABTBujDnBGHvPGHMQwOsAjgBQUREGQfRKH5bwqP0/t330lj7GXRsAAAAASUVORK5CYII="/>
+		<!-- End of Favicon -->
+
+		<!-- Bootstrap -->
+		<style>
+//bootstrap.min.css
+		</style>
+		<!-- End of Bootstrap -->
+
+		<!-- Cryptojs hashing functions -->
+		<script type="text/javascript">
+//cryptojs-v3-sha256.js
+		</script>
+		<script type="text/javascript">
+//cryptojs-v3-ripemd160.js
+		</script>
+		<script type="text/javascript">
+//cryptojs-v3-sha3.js
+		</script>
+		<script type="text/javascript">
+//cryptojs-v3-lib-typedarrays.js
+		</script>
+		<!-- End of cryptojs hashing functions -->
+
+		<!-- EC keypair generation -->
+		<script type="text/javascript">
+//jsrsasign-latest-all-min.js
+		</script>
+		<!-- End of EC keypair generation -->
+
+		<!-- Cryptocoinjs -->
+		<script type="text/javascript">
+//cryptocoinjs.js
+		</script>
+		<script type="text/javascript">
+//cryptocoinjs-bs58.js
+		</script>
+		<!-- End of Cryptocoinjs -->
+
+		<!-- Elliptic Curve -->
+		<script type="text/javascript">
+//ellipticcurve.js
+		</script>
+		<!-- end of Elliptic Curve -->
+
+		<!-- ECKey -->
+		<script type="text/javascript">
+//bitcoinjs-lib.js
+		</script>
+		<script type="text/javascript">
+//bitcoinjs-lib-biginteger.js
+		</script>
+		<script type="text/javascript">
+//bitcoinjs-lib-util.js
+		</script>
+		<script type="text/javascript">
+//bitcoinjs-lib-ecdsa.js
+		</script>
+		<script type="text/javascript">
+//bitcoinjs-lib-address.js
+		</script>
+		<script type="text/javascript">
+//bitcoinjs-lib-eckey.js
+		</script>
+		<!-- End of ECKey -->
+
+		<!-- Address generation functions -->
+		<!-- Luke Mitchell, July 2014 -->
+		<script type="text/javascript">
+			var hash_keccak = function(s) {
+				return CryptoJS.SHA3(s, {  outputLength: 256, asBytes: true });
+			}
+
+			var hash_sha256 = function(s) { 
+				return CryptoJS.SHA256(s, { asBytes: true });
+			}
+
+			var hash_ripemd160 = function(s) {
+				return CryptoJS.RIPEMD160(s, { asBytes: true });
+			}
+
+			function bytes_to_hex_string(arr) {
+				var str ='';
+				for(var i = 0; i < arr.length ; i++) {
+					str += ((arr[i] < 16) ? "0":"") + arr[i].toString(16);
+				}
+				return str;
+			}
+
+			function wordArrayToByteArray(wordArray) {
+				// Shortcuts
+		        var words = wordArray.words;
+		        var sigBytes = wordArray.sigBytes;
+
+		        // Convert
+		        var u8 = new Uint8Array(sigBytes);
+		        for (var i = 0; i < sigBytes; i++) {
+		            var byte = (words[i >>> 2] >>> (24 - (i % 4) * 8)) & 0xff;
+		            u8[i]=byte;
+		        }
+
+		        return u8;
+			}
+
+			// Generates a number of valid Mini keys
+			var minikeychars = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+
+			var mini2key = function(mini) {
+				if (!Bitcoin.ECKey.isMiniFormat(mini)) return false;
+				return new Bitcoin.ECKey(mini);
+			}
+
+			function buf2array(buf) {
+				var rs = [];
+				for(var i = 0; i < buf.length; i++) {
+					rs.push(buf[i]);
+				}
+				return rs;
+			}
+
+			var candidate = function() {
+				var mini = ["S"];
+				var size = BigInteger.valueOf(minikeychars.length);
+				var buf = BigInteger.fromByteArrayUnsigned(buf2array(Crypto.util.randomBytes(50).slice(0)));
+				while (mini.length < 30) {
+					var div = buf.divideAndRemainder(size);
+					mini.push(minikeychars.charAt(div[1]));
+					buf = div[0];
+					if (buf.compareTo(BigInteger.ONE) <= 0) {
+						console.log("Ran out of entropy with key only", mini.length, "long");
+						return false;
+					}
+				}
+				return mini.join('');
+			}	
+
+			var genmini = function() {
+				var n = document.getElementById("n").value;
+				var keysElem = document.getElementById("keys");
+
+				if (parseInt(n) == NaN) {
+					alert("Please enter the number of Minikeys to generate");
+					return;
+				}
+
+				var i = 0;
+				var tries = 0;
+				while (i < n) {
+					// make candidate key
+					var mini = candidate();
+					if (mini === false) continue;
+					tries++;
+
+					// valid Minikey?
+					if (!Bitcoin.ECKey.isMiniFormat(mini)) continue;
+
+					// generate ECKey
+					var key = new Bitcoin.ECKey(mini);
+
+					// check that it's valid
+					if (key.priv == 0) continue;
+
+					// yes!
+					var address = key.getBitcoinAddress();
+					keysElem.innerHTML += mini + ":" + address + "<br />";
+
+					// increment counter
+					i++;
+				}
+			}
+
+			var selectRange = function(containerid) {
+				if (document.selection) {
+		            var range = document.body.createTextRange();
+		            range.moveToElementText(document.getElementById(containerid));
+		            range.select();
+		        } else if (window.getSelection) {
+		            var range = document.createRange();
+		            range.selectNode(document.getElementById(containerid));
+		            window.getSelection().addRange(range);
+		        }
+		        window.prompt("Copy to clipboard by using CTRL+C then Enter", range);
+			}
+		</script>
+		<!-- End of address generation functions -->
+	</head>
+	<body>
+		<div class="container">
+			<div class="page-header">
+				<h1 class="text-muted">MaxCoin Cryptobullion Generation Tool</h1>
+				<p class="lead">This tool provides the ability to generate Minikeys and their corresponding MaxCoin addresses.</p>
+			</div>
+
+			<div class="row well">
+				<div class="col-md-4">
+					<span class="text-muted" style="font-size:0.8em;display:block;">Number of keys</span>
+					<form class="form form-inline" role="form">
+						<input type="text" id="n" class="form-control" value="" placeholder="50"></input>
+						<input type="button" class="btn btn-default" class="form-control" value="Generate" onclick="genmini()"></input>
+					</form>
+				</div>
+
+				<div class="col-md-2">
+					<p style="font-size:5em;font-weight:bolder;">&rlhar;</p>
+				</div>
+
+				<div class="col-md-6">
+					<div id="keys-container">
+						<span class="text-muted" style="font-size:0.8em;display:block;">Generated keys (minikey:address) [<a href="#" onclick="selectRange('keys')">Select</a>]</span>
+						<span id="keys" style="font-size:1em;font-weight:bold;font-family:Courier,monospace"></span>
+					</div>
+				</div>
+
+			</div>
+			<footer class="footer">
+		    	<p>Created by <a href="https://twitter.com/LukeCrypto">LukeCrypto</a> for Mike Murphy &bullet; 2015 &bullet; MaxCoin Cryptobullion Project</p>
+		    </footer>
+		</div>
+	</body>
+</html>
